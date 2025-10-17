@@ -30,15 +30,16 @@ export interface Publication {
  * - award: Award name (e.g., "Best Paper Award") - displays with 🏆 emoji
  */
 const BIBTEX_CONTENT = `
-@inproceedings{han2023robot,
-  author = {Howard Han and Franklin Li and Nikolas Martelaro and Daragh Byrne and Sarah Fox},
-  title = {The Robot in Our Path: Investigating the Perceptions of People with Motor Disabilities on Navigating Public Space Alongside Sidewalk Robots},
-  booktitle = {ASSETS 2023 Short Paper},
-  year = {2023},
-  image = {/images/socialnav-sim.png},
-  pdflink = {https://dl.acm.org/doi/abs/10.1145/3597638.3614508},
-  tags = {Accessibility, Qualitative Research},
-  highlight = {Howard Han}
+@article{deng2025weaudit,
+  title={WeAudit: Scaffolding User Auditors and AI Practitioners in Auditing Generative AI},
+  author={Wesley Deng, Claire Wang, Howard Han, Jason Hong, Kenneth Holstein and Motahhare Eslami},
+  journal={ACM SIGCHI Conference on Computer-Supported Cooperative Work & Social Computing (CSCW)},
+  year={2025},
+  award={CSCW Best Paper Award},
+  image={/images/weaudit.png},
+  pdflink={https://arxiv.org/abs/2501.01397},
+  tags={Generative AI, NLP, Crowdsourcing},
+  highlight={Howard Han}
 }
 
 @article{wan2022berlin,
@@ -51,18 +52,18 @@ const BIBTEX_CONTENT = `
   tags = {Applied Machine Learning, Data Visualization, Crowdsourcing},
   highlight = {Howard Han}
 }
-
-@article{deng2025weaudit,
-  title={WeAudit: Scaffolding User Auditors and AI Practitioners in Auditing Generative AI},
-  author={Wesley Deng, Claire Wang, Howard Han, Jason Hong, Kenneth Holstein and Motahhare Eslami},
-  journal={ACM SIGCHI Conference on Computer-Supported Cooperative Work & Social Computing (CSCW)},
-  year={2025},
-  award={CSCW Best Paper Award},
-  image={/images/weaudit.png},
-  pdflink={https://arxiv.org/abs/2501.01397},
-  tags={Generative AI, NLP, Crowdsourcing},
-  highlight={Howard Han}
+  
+@inproceedings{han2023robot,
+  author = {Howard Han and Franklin Li and Nikolas Martelaro and Daragh Byrne and Sarah Fox},
+  title = {The Robot in Our Path: Investigating the Perceptions of People with Motor Disabilities on Navigating Public Space Alongside Sidewalk Robots},
+  booktitle = {ASSETS 2023 Short Paper},
+  year = {2023},
+  image = {/images/socialnav-sim.png},
+  pdflink = {https://dl.acm.org/doi/abs/10.1145/3597638.3614508},
+  tags = {Accessibility, Qualitative Research},
+  highlight = {Howard Han}
 }
+
 `;
 
 /**

@@ -1,0 +1,12 @@
+<svg width="240" height="180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="240" height="180" fill="#f8f9fa"/>
+  <rect x="40" y="40" width="160" height="80" fill="#e9ecef" rx="4"/>
+  <circle cx="80" cy="70" r="10" fill="#adb5bd"/>
+  <rect x="100" y="65" width="80" height="6" fill="#adb5bd" rx="3"/>
+  <rect x="100" y="80" width="60" height="6" fill="#ced4da" rx="3"/>
+  <text x="120" y="150" font-family="Arial, sans-serif" font-size="12" fill="#6c757d" text-anchor="middle">
+    Project Image
+  </text>
+</svg>
+
+

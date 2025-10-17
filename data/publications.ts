@@ -73,8 +73,9 @@ const BIBTEX_CONTENT = `
 function loadPublications(): Publication[] {
   try {
     const publications = parseBibTeX(BIBTEX_CONTENT);
-    // Sort by year (newest first)
-    return publications.sort((a, b) => b.year - a.year);
+    // Publications appear in the order they're written in BIBTEX_CONTENT
+    // To sort by year instead, uncomment: return publications.sort((a, b) => b.year - a.year);
+    return publications;
   } catch (error) {
     console.error('Error parsing BibTeX:', error);
     return [];

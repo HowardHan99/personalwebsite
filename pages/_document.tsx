@@ -8,6 +8,11 @@ export default function Document() {
         <meta name="description" content="Personal academic website showcasing research, publications, and projects" />
         <meta name="keywords" content="research, academic, HCI, human-computer interaction, publications" />
         <meta name="author" content="Howard Han" />
+        <link rel="icon" href="/webicon.ico" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
       </Head>
       <body>
         <Main />

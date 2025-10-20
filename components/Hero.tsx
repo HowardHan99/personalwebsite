@@ -1,7 +1,8 @@
 import React from 'react';
 import { personalInfo } from '../data/personalInfo';
 import { siteConfig } from '../data/siteConfig';
-import { parseMarkdown } from '../utils/markdownParser';
+import { parseMarkdown, TextPart } from '../utils/markdownParser';
+import { publications } from '../data/publications';
 import News from './News';
 import styles from '../styles/Hero.module.css';
 
@@ -17,6 +18,61 @@ export default function Hero() {
   // Split bio into paragraphs
   const paragraphs = personalInfo.bio.split('\n\n');
 
+  const renderParts = (parts: TextPart[]): React.ReactNode[] => {
+    return parts.map((part, index) => {
+      const key = `part-${index}`;
+
+      const children = typeof part.content === 'string'
+        ? part.content
+        : renderParts(part.content as TextPart[]);
+
+      switch (part.type) {
+        case 'text':
+          return <React.Fragment key={key}>{children}</React.Fragment>;
+        case 'bold':
+          return <strong key={key}>{children}</strong>;
+        case 'italic':
+          return <span key={key} className={styles.specialFormat}>{children}</span>;
+        case 'link':
+          return (
+            <a 
+              key={key} 
+              href={part.href} 
+              className={styles.link}
+              style={part.color ? { color: part.color } : undefined}
+              target={part.href?.startsWith('#') ? undefined : '_blank'}
+              rel={part.href?.startsWith('#') ? undefined : 'noopener noreferrer'}
+            >
+              {children}
+            </a>
+          );
+        case 'color':
+          return (
+            <span 
+              key={key} 
+              style={{ color: part.color }}
+            >
+              {children}
+            </span>
+          );
+        case 'publication':
+          const pub = publications.find(p => p.id === part.publicationId);
+          if (!pub) return null;
+          return (
+            <a 
+              key={key}
+              href={`/#${pub.id}`}
+              className={styles.link}
+            >
+              [{pub.shortvenue || pub.id} '{pub.year.toString().slice(2)}]
+            </a>
+          );
+        default:
+          return null;
+      }
+    });
+  };
+
   return (
     <section className={styles.hero} id="home">
       <div className={styles.container}>
@@ -31,41 +87,7 @@ export default function Hero() {
               
               return (
                 <p key={pIndex}>
-                  {parts.map((part, tIndex) => {
-                    switch (part.type) {
-                      case 'text':
-                        return <span key={tIndex}>{part.content}</span>;
-                      
-                      case 'bold':
-                        return <strong key={tIndex}>{part.content}</strong>;
-                      
-                      case 'link':
-                        return (
-                          <a 
-                            key={tIndex} 
-                            href={part.href} 
-                            className={styles.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {part.content}
-                          </a>
-                        );
-                      
-                      case 'color':
-                        return (
-                          <span 
-                            key={tIndex} 
-                            style={{ color: part.color }}
-                          >
-                            {part.content}
-                          </span>
-                        );
-                      
-                      default:
-                        return null;
-                    }
-                  })}
+                  {renderParts(parts)}
                 </p>
               );
             })}

@@ -12,6 +12,7 @@ export interface ParsedPublication {
   authors: string;
   authorHighlight: string;
   venue: string;
+  shortvenue?: string;
   year: number;
   image: string;
   pdfLink?: string;
@@ -124,6 +125,7 @@ function convertBibTeXToPublication(entry: BibTeXEntry): ParsedPublication {
     authors: cleanLatex(fields.author || ''),
     authorHighlight: cleanLatex(authorHighlight),
     venue: cleanLatex(venue),
+    shortvenue: fields.shortvenue ? cleanLatex(fields.shortvenue) : undefined,
     year: parseInt(fields.year || '0', 10),
     image: fields.image || defaultImage,
     pdfLink: fields.pdflink || fields.pdf,

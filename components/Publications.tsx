@@ -23,7 +23,7 @@ export default function Publications() {
         
         <div className={styles.publicationList}>
           {publications.map((pub) => (
-            <div key={pub.id} className={styles.publicationCard}>
+            <div key={pub.id} id={pub.id} className={styles.publicationCard}>
               <div className={styles.publicationImage}>
                 <img src={pub.image} alt={pub.title} />
               </div>

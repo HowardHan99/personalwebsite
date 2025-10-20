@@ -37,7 +37,12 @@ export default function News() {
               <span className={styles.date}>{formatDate(item.date)}</span>
               <span className={styles.text}>
                 {item.link ? (
-                  <a href={item.link} className={styles.link}>
+                  <a 
+                    href={item.link} 
+                    className={styles.link}
+                    target={item.link.startsWith('#') ? undefined : '_blank'}
+                    rel={item.link.startsWith('#') ? undefined : 'noopener noreferrer'}
+                  >
                     {item.content}
                   </a>
                 ) : (

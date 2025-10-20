@@ -8,14 +8,14 @@
  */
 
 export interface TextPart {
-  type: 'text' | 'bold' | 'link' | 'color';
-  content: string;
+  type: 'text' | 'bold' | 'link' | 'color' | 'italic' | 'publication';
+  content: string | TextPart[];
   href?: string;
   color?: string;
+  publicationId?: string;
 }
 
 export function parseMarkdown(text: string, fields: Record<string, string> = {}): TextPart[] {
-  const parts: TextPart[] = [];
   let remaining = text;
   
   // Replace field placeholders first
@@ -23,64 +23,78 @@ export function parseMarkdown(text: string, fields: Record<string, string> = {})
     remaining = remaining.replace(new RegExp(`\\{${key}\\}`, 'g'), value);
   });
   
-  // Parse markdown-like syntax
-  // Supports: **bold**, [link](url), {{color:text}}
-  const regex = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|\{\{[^:}]+:[^}]+\}\})/g;
-  let lastIndex = 0;
-  let match;
-  
-  while ((match = regex.exec(remaining)) !== null) {
-    // Add text before the match
-    if (match.index > lastIndex) {
-      const textBefore = remaining.substring(lastIndex, match.index);
-      if (textBefore) {
-        parts.push({ type: 'text', content: textBefore });
+  function _parse(currentText: string): TextPart[] {
+    const parts: TextPart[] = [];
+    // Supports: **bold**, _italic_, [link](url){color}, {{color:text}}, [pub:id]
+    const regex = /(\*\*.*?\*\*|_.*?_|\[[^\]]+?\]\([^)]+?\)(?:\{[^{}]*?\})?|{{[^:}]+?:[^}]+?}}|\[pub:[^\]]+?\])/g;
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(currentText)) !== null) {
+      // Add text before the match
+      if (match.index > lastIndex) {
+        parts.push({ type: 'text', content: currentText.substring(lastIndex, match.index) });
       }
-    }
-    
-    const matched = match[0];
-    
-    // Parse **bold**
-    if (matched.startsWith('**') && matched.endsWith('**')) {
-      parts.push({
-        type: 'bold',
-        content: matched.slice(2, -2),
-      });
-    }
-    // Parse [text](url)
-    else if (matched.startsWith('[')) {
-      const linkMatch = matched.match(/\[([^\]]+)\]\(([^)]+)\)/);
-      if (linkMatch) {
+      
+      const matched = match[0];
+      
+      // Parse **bold**
+      if (matched.startsWith('**') && matched.endsWith('**')) {
         parts.push({
-          type: 'link',
-          content: linkMatch[1],
-          href: linkMatch[2],
+          type: 'bold',
+          content: _parse(matched.slice(2, -2)),
         });
       }
-    }
-    // Parse {{color:text}}
-    else if (matched.startsWith('{{') && matched.endsWith('}}')) {
-      const colorMatch = matched.match(/\{\{([^:}]+):([^}]+)\}\}/);
-      if (colorMatch) {
+      // Parse _italic_
+      else if (matched.startsWith('_') && matched.endsWith('_')) {
         parts.push({
-          type: 'color',
-          content: colorMatch[2],
-          color: colorMatch[1],
+          type: 'italic',
+          content: _parse(matched.slice(1, -1)),
         });
       }
+      // Parse [text](url){color}
+      else if (matched.startsWith('[')) {
+        const linkMatch = matched.match(/\[([^\]]+?)\]\(([^)]+?)\)(?:\{([^{}]*?)\})?/);
+        if (linkMatch) {
+          parts.push({
+            type: 'link',
+            content: _parse(linkMatch[1]),
+            href: linkMatch[2],
+            color: linkMatch[3],
+          });
+        }
+      }
+      // Parse {{color:text}}
+      else if (matched.startsWith('{{') && matched.endsWith('}}')) {
+        const colorMatch = matched.match(/\{\{([^:}]+?):([^}]+?)\}\}/);
+        if (colorMatch) {
+          parts.push({
+            type: 'color',
+            content: _parse(colorMatch[2]),
+            color: colorMatch[1],
+          });
+        }
+      }
+      // Parse [pub:id]
+      else if (matched.startsWith('[pub:')) {
+        parts.push({
+          type: 'publication',
+          content: '', // Will be filled in by the rendering component
+          publicationId: matched.slice(5, -1),
+        });
+      }
+      
+      lastIndex = regex.lastIndex;
     }
     
-    lastIndex = regex.lastIndex;
-  }
-  
-  // Add remaining text
-  if (lastIndex < remaining.length) {
-    const textAfter = remaining.substring(lastIndex);
-    if (textAfter) {
-      parts.push({ type: 'text', content: textAfter });
+    // Add remaining text
+    if (lastIndex < currentText.length) {
+      parts.push({ type: 'text', content: currentText.substring(lastIndex) });
     }
+    
+    return parts;
   }
   
-  return parts;
+  return _parse(remaining);
 }
 

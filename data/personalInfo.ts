@@ -18,11 +18,9 @@ export const personalInfo = {
   
   
   bio: `
-I am a {title} at [{institution}, {institutionName}.]({institutionLink}) I am fortunate to be advised by [Nikolas Martelaro](https://nikmartelaro.com/). I work on projects related to {{#e85d04:Human-Robot and Human-Agent Interaction}}, {{ #e85d04:Design}}, {{#e85d04:Responsible AI}}, and {{ #e85d04:HCI}} in general.
+I am a {title} at [{institution}, {institutionName}.]({institutionLink}) I am fortunate to be advised by [Nikolas Martelaro](https://nikmartelaro.com/). I work on projects related to {{#e85d04:Human-Robot and Human-Agent Interaction}}, {{ #e85d04:Design}}, {{#e85d04:Responsible AI}}, and {{ #e85d04:HCI}} in general. My research goal is to advance bidirectional Human-Robot and Human-Agent Interaction drawn from fields like Design, HCI, HRI, and AI.
 
-My research goal is to advance bidirectional Human-Robot and Human-Agent Interaction drawn from fields like Design, HCI, HRI, and AI. I am interested in tools and processes to augment the design process with a specific focus in robot design. 
-
-**_From Design to Human-Agent Interaction_**: Specifically, I work on projects on {{#e85d04:Public Space Service Robots}}, involving community members, especially people with mobility disability, in the initial co-design, simulation-based evaluation, and robot policy development for more socially inclusive and compliant robot deployment. Works from this line of research has been published at CHI and ASSETS, and covered in [TechXplore](https://techxplore.com/news/2024-06-robots-crosswalks-sidewalks-traffic.html) and [Triblive](https://triblive.com/local/valley-news-dispatch/ai-opens-new-worlds-for-the-blind/).
+**_From Design to Human-Agent Interaction_**: I work on projects on {{#e85d04:Public Space Service Robots}}, involving community members, especially people with mobility disability, in the simulation-based evaluation, and robot policy development for more socially inclusive and compliant robot deployment. Works from this line of research have been published at CHI and ASSETS, and covered in [TechXplore](https://techxplore.com/news/2024-06-robots-crosswalks-sidewalks-traffic.html) and [Triblive](https://triblive.com/local/valley-news-dispatch/ai-opens-new-worlds-for-the-blind/).
 
 _**From Human-Agent Interaction to Design**_: Another line of research is to develop {{#e85d04:Design Agents}} that spark human creativity, critical thinking, and adaptability, built upon theories from Human-Robot Interaction.  
 

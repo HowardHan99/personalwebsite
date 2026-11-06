@@ -165,3 +165,63 @@
 }
 
 
+
+/* ---- Research lines inside the bio ---- */
+
+.thread {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 1px solid var(--border-color);
+}
+
+.thread p {
+  margin-bottom: 0;
+}
+
+.thread .threadLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--link-color);
+  margin-bottom: 0.25rem;
+}
+
+.thread .paperTags {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.paperTag {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.paperTag:hover {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* In-page links (to papers / sections): quiet, so external links stay the accent */
+.anchorLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--text-muted);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.anchorLink:hover {
+  color: var(--link-color);
+  text-decoration-color: var(--link-color);
+}
+
+.inSubmission {
+  font-style: italic;
+  color: var(--text-muted);
+}

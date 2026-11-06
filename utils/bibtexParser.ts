@@ -18,6 +18,8 @@ export interface ParsedPublication {
   pdfLink?: string;
   tags: string[];
   award?: string;
+  section?: string;
+  imageFit?: 'cover' | 'contain';
 }
 
 interface BibTeXEntry {
@@ -131,6 +133,8 @@ function convertBibTeXToPublication(entry: BibTeXEntry): ParsedPublication {
     pdfLink: fields.pdflink || fields.pdf,
     tags,
     award: fields.award ? cleanLatex(fields.award) : undefined,
+    imageFit: fields.imagefit === 'contain' ? 'contain' : undefined,
+    section: fields.section ? cleanLatex(fields.section) : undefined,
   };
 }
 

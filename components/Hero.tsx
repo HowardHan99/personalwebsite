@@ -38,7 +38,7 @@ export default function Hero() {
             <a 
               key={key} 
               href={part.href} 
-              className={styles.link}
+              className={part.href?.startsWith('#') ? styles.anchorLink : styles.link}
               style={part.color ? { color: part.color } : undefined}
               target={part.href?.startsWith('#') ? undefined : '_blank'}
               rel={part.href?.startsWith('#') ? undefined : 'noopener noreferrer'}
@@ -83,12 +83,44 @@ export default function Hero() {
           
           <div className={styles.bio}>
             {paragraphs.map((paragraph, pIndex) => {
-              const parts = parseMarkdown(paragraph, fields);
-              
+              // A paragraph whose last line is "papers: id1, id2" becomes a research thread
+              const lines = paragraph.split('\n');
+              const papersLine = lines[lines.length - 1].match(/^papers:\s*(.*)$/i);
+
+              if (!papersLine) {
+                return <p key={pIndex}>{renderParts(parseMarkdown(paragraph, fields))}</p>;
+              }
+
+              // Leading "**_Label_**:" becomes the thread's small heading
+              const body = lines.slice(0, -1).join(' ');
+              const labelMatch = body.match(/^\*\*_?(.+?)_?\*\*:?\s*/);
+              const label = labelMatch ? labelMatch[1] : null;
+              const text = labelMatch ? body.slice(labelMatch[0].length) : body;
+              const linked = papersLine[1]
+                .split(',')
+                .map((id) => publications.find((pub) => pub.id === id.trim()))
+                .filter((pub): pub is (typeof publications)[number] => Boolean(pub));
+
               return (
-                <p key={pIndex}>
-                  {renderParts(parts)}
-                </p>
+                <div key={pIndex} className={styles.thread}>
+                  {label && <p className={styles.threadLabel}>{label}</p>}
+                  <p>{renderParts(parseMarkdown(text, fields))}</p>
+                  {linked.length > 0 && (
+                    <p className={styles.paperTags}>
+                      {linked.map((pub, idx) => (
+                        <React.Fragment key={pub.id}>
+                          {idx > 0 && <span aria-hidden="true"> · </span>}
+                          <a href={`#${pub.id}`} className={styles.paperTag} title={pub.title}>
+                            {pub.shortvenue || 'Paper'} &rsquo;{String(pub.year).slice(2)}
+                            {/in submission/i.test(pub.venue) && (
+                              <span className={styles.inSubmission}> (in submission)</span>
+                            )}
+                          </a>
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  )}
+                </div>
               );
             })}
           </div>

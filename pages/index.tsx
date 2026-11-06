@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Projects from '../components/Projects';
 import Publications from '../components/Publications';
+import Community from '../components/Community';
 import { siteConfig } from '../data/siteConfig';
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
 
         {siteConfig.showProjects && <Projects />}
         {siteConfig.showPublications && <Publications />}
+        {siteConfig.showCommunity && <Community />}
       </main>
     </>
   );

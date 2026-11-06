@@ -13,6 +13,8 @@ export interface Publication {
   pdfLink?: string;
   tags: string[];
   award?: string;
+  imageFit?: 'cover' | 'contain';
+  section?: string; // e.g. 'earlier' to list under Earlier Work
 }
 
 /**
@@ -28,19 +30,69 @@ export interface Publication {
  * - tags: Comma-separated skill tags (e.g., "HCI, Machine Learning")
  * - pdflink or pdf: Path to PDF file (e.g., "/papers/paper.pdf")
  * - highlight: Author name to highlight in bold (default: last author)
+ * - imagefit: 'contain' to show the whole image (for wide figures) instead of cropping
  * - award: Award name (e.g., "Best Paper Award") - displays with 🏆 emoji
  */
 const BIBTEX_CONTENT = `
-@inproceedings{han2024antagonistic,
-  title={Enacting Facets of Adversarial Design with AI Agents},
-  author={Howard Han and Nikolas Martelaro},
-  booktitle={In Submission to the 2026 CHI Conference on Human Factors in Computing Systems},
-  pages={1--20},
-  highlight = {Howard Han},
-  year={2026}
+@inproceedings{han2027proactive,
+  title={Investigating How Designers Perceive the Timing and Content of Proactive AI-generated Feedback},
+  author={Howard Ziyu Han, Sirui Tao, Jingwen Pan, Seung Heon Song, Steven P. Dow and Nikolas Martelaro},
+  booktitle={In Submission to the 2027 CHI Conference on Human Factors in Computing Systems},
+  year={2027},
+  highlight = {Howard Ziyu Han},
+  tags = {Human-Agent Interaction, Design Feedback, Proactive AI},
+  image = {/images/proactive-feedback.png},
+  imagefit = {contain},
+  shortvenue = {CHI},
+}
+
+@inproceedings{han2027publicsim,
+  title={Learning Social Navigation Strategies and Challenging Scenarios through Public-engaged Simulation},
+  author={Howard Ziyu Han, Ying Zhang, Grace Yang, Yulin Chen, Aaron Steinfeld, Allan Wang, Sarah E Fox and Nikolas Martelaro},
+  booktitle={In Submission to the 2027 ACM/IEEE International Conference on Human-Robot Interaction},
+  year={2027},
+  highlight = {Howard Ziyu Han},
+  tags = {Human-Robot Interaction, Social Navigation, Simulation, Participatory Design},
+  image = {/images/public-sim.jpg},
+  award = {IROS 2026 Social Navigation Workshop Spotlight Paper},
+  shortvenue = {HRI},
+}
+
+@article{marpally2026acme,
+  title={ACME: A Multi-Cultural, Multi-Embodiment Social-Navigation Dataset},
+  author={Shashank Rao Marpally, Allan Wang, Atharva Ghotavadekar, Renato Alexandre Ribeiro, Nhat Le, Pilar Bachiller-Burgos, Pranav Goyal, Subham Agrawal, Yasuhiro Nitta, Howard Ziyu Han, et al., Aaron Steinfeld, Xuesu Xiao, Christoforos Mavrogiannis and Harold Soh},
+  journal={In Submission to the International Journal of Robotics Research (IJRR)},
+  year={2026},
+  pdflink = {https://arxiv.org/abs/2607.21964},
+  highlight = {Howard Ziyu Han},
+  tags = {Social Navigation, Robotics Dataset, Cross-cultural Research},
+  image = {/images/acme.jpg},
+  imagefit = {contain},
+  shortvenue = {IJRR},
+}
+
+@inproceedings{han2026constructive,
+  title={Enacting Constructive Conflicts with AI Agents to Enhance Reconsideration among Novice Interaction Designers},
+  author={Howard Ziyu Han and Nikolas Martelaro},
+  booktitle={International Conference on Human-Agent Interaction (HAI)},
+  year={2026},
+  pdflink = {https://arxiv.org/abs/2608.04166},
+  highlight = {Howard Ziyu Han},
   tags = {Human-Agent Interaction, LLM Applications, Quantitative Research},
   image = {/images/antagonisticbot.png},
-  shortvenue = {CHI},
+  shortvenue = {HAI},
+}
+
+@inproceedings{han2026enhancedsim,
+  title={Enhanced Social Navigation Simulation for Community-Driven Participatory Evaluation of Sidewalk Robots},
+  author={Howard Ziyu Han, Ying Zhang, Allan Wang and Nikolas Martelaro},
+  booktitle={Companion of the 2026 ACM/IEEE International Conference on Human-Robot Interaction},
+  year={2026},
+  highlight = {Howard Ziyu Han},
+  tags = {Human-Robot Interaction, Simulation, Participatory Evaluation},
+  image = {/images/socialnav-sim.png},
+  pdflink = {https://doi.org/10.1145/3776734.3794524},
+  shortvenue = {HRI},
 }
 
 @inproceedings{han2024codesign,
@@ -91,7 +143,8 @@ pdflink={https://ieeexplore.ieee.org/abstract/document/10108893},
 image={/images/social-vr.png},
 tags={Social Virtual Reality, Unity Development, Psychological Experiments},
 highlight={Howard Han},
-shortvenue = {VRW},
+section = {earlier},
+  shortvenue = {VRW},
 }
 
 @inproceedings{wang2025raise,
@@ -104,6 +157,7 @@ shortvenue = {VRW},
   pdflink={https://dl.acm.org/doi/full/10.1145/3706598.3713688},
   tags={Social Virtual Reality, Facial Expression, Emotional Communication},
   highlight={Howard Han},
+  section = {earlier},
   shortvenue = {CHI},
 }
 
@@ -116,6 +170,7 @@ shortvenue = {VRW},
   pdflink = {https://gispoint.de/fileadmin/user_upload/paper_gis_open/DLA_2021/537705039.pdf},
   tags = {Applied Machine Learning, Data Visualization, Crowdsourcing},
   highlight = {Howard Han},
+  section = {earlier},
   shortvenue = {DLA},
 }
   

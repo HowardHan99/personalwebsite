@@ -475,7 +475,7 @@ seeking: "${formData.seeking}",`;
       )}
 
       <div className={styles.note}>
-        <strong>Note:</strong> For full bio editing, please edit <code>data/personalInfo.ts</code> directly.
+        <strong>Note:</strong> For full bio editing, please edit <code>data/bio.md</code> directly.
         This form only updates basic fields.
       </div>
     </div>

@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { publications } from '../data/publications';
 import styles from '../styles/Publications.module.css';
 
 export default function Publications() {
+  const [showEarlier, setShowEarlier] = useState(false);
+  const mainPubs = publications.filter((p) => p.section !== 'earlier');
+  const earlierPubs = publications.filter((p) => p.section === 'earlier');
+
   const formatAuthors = (authors: string, highlight: string) => {
     const parts = authors.split(highlight);
     if (parts.length === 1) return authors;
@@ -16,48 +20,70 @@ export default function Publications() {
     );
   };
 
+  const renderList = (list: typeof publications) =>
+    list.map((pub) => (
+      <div key={pub.id} id={pub.id} className={styles.publicationCard}>
+        <div className={styles.publicationImage} data-fit={pub.imageFit}>
+          <img src={pub.image} alt={pub.title} />
+        </div>
+        <div className={styles.publicationContent}>
+          <h3 className={styles.publicationTitle}>{pub.title}</h3>
+          {pub.award && (
+            <div className={styles.award}>
+              🏆 {pub.award}
+            </div>
+          )}
+          <p className={styles.publicationAuthors}>
+            {formatAuthors(pub.authors, pub.authorHighlight)}
+          </p>
+          <p className={styles.publicationVenue}>
+            {pub.venue}
+            {pub.pdfLink && (
+              <>
+                {' '}
+                <a 
+                  href={pub.pdfLink} 
+                  className={styles.pdfLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  [PDF]
+                </a>
+              </>
+            )}
+          </p>
+        </div>
+      </div>
+    ));
+
   return (
     <section className={styles.publications} id="publications">
       <div className={styles.container}>
         <h2 className={styles.title}>Publications</h2>
         
         <div className={styles.publicationList}>
-          {publications.map((pub) => (
-            <div key={pub.id} id={pub.id} className={styles.publicationCard}>
-              <div className={styles.publicationImage}>
-                <img src={pub.image} alt={pub.title} />
-              </div>
-              <div className={styles.publicationContent}>
-                <h3 className={styles.publicationTitle}>{pub.title}</h3>
-                {pub.award && (
-                  <div className={styles.award}>
-                    🏆 {pub.award}
-                  </div>
-                )}
-                <p className={styles.publicationSubtitle}>{pub.subtitle}</p>
-                <p className={styles.publicationAuthors}>
-                  {formatAuthors(pub.authors, pub.authorHighlight)}
-                </p>
-                <p className={styles.publicationVenue}>
-                  {pub.venue}
-                  {pub.pdfLink && (
-                    <>
-                      {' '}
-                      <a 
-                        href={pub.pdfLink} 
-                        className={styles.pdfLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        [PDF]
-                      </a>
-                    </>
-                  )}
-                </p>
-              </div>
-            </div>
-          ))}
+          {renderList(mainPubs)}
         </div>
+
+        {earlierPubs.length > 0 && (
+          <div className={styles.earlier}>
+            <button
+              type="button"
+              className={styles.earlierToggle}
+              onClick={() => setShowEarlier((v) => !v)}
+              aria-expanded={showEarlier}
+              aria-controls="earlier-work"
+            >
+              <span className={styles.earlierChevron} data-open={showEarlier}>▸</span>
+              Earlier Work in VR &amp; Visualization ({earlierPubs.length})
+            </button>
+            {showEarlier && (
+              <div id="earlier-work" className={styles.publicationList}>
+                {renderList(earlierPubs)}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

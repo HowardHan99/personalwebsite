@@ -1,5 +1,5 @@
 .publications {
-  padding: 0rem 0 4rem 0;
+  padding: 4rem 0;
   background-color: var(--bg-primary);
   transition: background-color 0.3s ease;
 }
@@ -39,7 +39,9 @@
 
 .publicationImage {
   width: 240px;
-  height: 180px;
+  height: 100%;
+  min-height: 180px;
+  align-self: stretch;
   overflow: hidden;
   background-color: #e9ecef;
   display: flex;
@@ -48,6 +50,7 @@
 }
 
 .publicationImage img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -123,6 +126,7 @@
   .publicationImage {
     width: 100%;
     height: 200px;
+    min-height: 0;
   }
   
   .publicationContent {
@@ -130,3 +134,43 @@
   }
 }
 
+
+.earlier {
+  margin-top: 3rem;
+}
+
+.earlierToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  margin-bottom: 1.5rem;
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+}
+
+.earlierToggle:hover {
+  opacity: 0.75;
+}
+
+.earlierChevron {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.earlierChevron[data-open='true'] {
+  transform: rotate(90deg);
+}
+
+.publicationImage[data-fit='contain'] {
+  background-color: #fff;
+}
+
+.publicationImage[data-fit='contain'] img {
+  object-fit: contain;
+}

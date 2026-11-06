@@ -1,0 +1,93 @@
+name: Sync CV from Overleaf
+
+# Pulls the CV project from Overleaf, compiles it, and commits the PDF to
+# public/cv.pdf (served by /api/cv). Only commits when Overleaf actually changed.
+#
+# Setup:
+#   1. Repo Settings → Secrets and variables → Actions → New secret
+#      Name: OVERLEAF_TOKEN   Value: your Overleaf Git token (olp_...)
+#   2. Set OVERLEAF_PROJECT_ID below (the id in your Overleaf project URL:
+#      https://www.overleaf.com/project/<THIS_PART>)
+#   3. Set CV_MAIN_TEX if your main file is not main.tex
+
+on:
+  schedule:
+    - cron: '17 * * * *' # hourly
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-cv
+  cancel-in-progress: false
+
+env:
+  OVERLEAF_PROJECT_ID: 6aed4fecd5d3011748578406
+  CV_MAIN_TEX: resume_faangpath.tex
+  CV_PATH: public/cv.pdf
+  REV_FILE: .github/cv-overleaf-rev
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone Overleaf project
+        env:
+          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+        run: |
+          if [ -z "$OVERLEAF_TOKEN" ]; then
+            echo "::error::OVERLEAF_TOKEN secret is not set"; exit 1
+          fi
+          git clone --depth 1 "https://git:${OVERLEAF_TOKEN}@git.overleaf.com/${OVERLEAF_PROJECT_ID}" overleaf
+
+      - name: Check whether Overleaf changed
+        id: check
+        run: |
+          rev=$(git -C overleaf rev-parse HEAD)
+          last=$(cat "$REV_FILE" 2>/dev/null || true)
+          echo "rev=$rev" >> "$GITHUB_OUTPUT"
+          if [ "$rev" = "$last" ] && [ -f "$CV_PATH" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Overleaf unchanged ($rev); nothing to do."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+          # Use XeLaTeX if the CV loads fontspec (custom fonts), else pdfLaTeX
+          if grep -qE '\\usepackage(\[[^]]*\])?\{fontspec\}' "overleaf/$CV_MAIN_TEX"; then
+            echo "engine=xelatex" >> "$GITHUB_OUTPUT"
+          else
+            echo "engine=pdflatex" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Compile (pdfLaTeX)
+        if: steps.check.outputs.changed == 'true' && steps.check.outputs.engine == 'pdflatex'
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: ${{ env.CV_MAIN_TEX }}
+          working_directory: overleaf
+
+      - name: Compile (XeLaTeX)
+        if: steps.check.outputs.changed == 'true' && steps.check.outputs.engine == 'xelatex'
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: ${{ env.CV_MAIN_TEX }}
+          working_directory: overleaf
+          latexmk_use_xelatex: true
+
+      - name: Commit updated CV
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          cp "overleaf/${CV_MAIN_TEX%.tex}.pdf" "$CV_PATH"
+          echo "${{ steps.check.outputs.rev }}" > "$REV_FILE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add "$CV_PATH" "$REV_FILE"
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update CV from Overleaf"
+            git push
+          fi

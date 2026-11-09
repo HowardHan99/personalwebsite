@@ -20,6 +20,7 @@ export interface ParsedPublication {
   award?: string;
   section?: string;
   imageFit?: 'cover' | 'contain';
+  abstract?: string;
 }
 
 interface BibTeXEntry {
@@ -133,6 +134,7 @@ function convertBibTeXToPublication(entry: BibTeXEntry): ParsedPublication {
     pdfLink: fields.pdflink || fields.pdf,
     tags,
     award: fields.award ? cleanLatex(fields.award) : undefined,
+    abstract: fields.abstract ? cleanLatex(fields.abstract) : undefined,
     imageFit: fields.imagefit === 'contain' ? 'contain' : undefined,
     section: fields.section ? cleanLatex(fields.section) : undefined,
   };

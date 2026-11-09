@@ -14,6 +14,7 @@ export interface Publication {
   tags: string[];
   award?: string;
   imageFit?: 'cover' | 'contain';
+  abstract?: string;
   section?: string; // e.g. 'earlier' to list under Earlier Work
 }
 
@@ -31,6 +32,7 @@ export interface Publication {
  * - pdflink or pdf: Path to PDF file (e.g., "/papers/paper.pdf")
  * - highlight: Author name to highlight in bold (default: last author)
  * - imagefit: 'contain' to show the whole image (for wide figures) instead of cropping
+ * - abstract: Paper abstract, shown behind an [Abstract] toggle (no { } or double quotes)
  * - award: Award name (e.g., "Best Paper Award") - displays with 🏆 emoji
  */
 const BIBTEX_CONTENT = `
@@ -43,6 +45,8 @@ const BIBTEX_CONTENT = `
   tags = {Human-Agent Interaction, Design Feedback, Proactive AI},
   image = {/images/proactive-feedback.png},
   imagefit = {contain},
+  pdflink = {/papers/han-chi27-proactive-feedback.pdf},
+  abstract = {Designers increasingly ask generative AI for feedback on creative artifacts. What is the potential for AI to proactively guide and spark ongoing work? Such proactivity creates an orchestration problem: what to offer, how to frame it, and when to inject it into the process. To explore this, we created a Wizard-of-Oz system where designers receive in-situ AI-generated perspectives, mediated by a human wizard. In a study with N=20 designers, the wizard generated a total of 81 proactive interventions, including design thinking strategies and synthetic stakeholder perspectives. Participants rated each intervention in real time for its perceived timeliness and usefulness. These judgments frequently diverged: useful content could arrive at bad moments, while good timing did not guarantee a useful perspective. We identify when and why these perspectives provide value, as well as why even carefully selected perspectives can miss designers' needs. Our findings offer implications for future autonomous proactive design support.},
   shortvenue = {CHI},
 }
 
@@ -55,6 +59,8 @@ const BIBTEX_CONTENT = `
   tags = {Human-Robot Interaction, Social Navigation, Simulation, Participatory Design},
   image = {/images/public-sim.jpg},
   award = {IROS 2026 Social Navigation Workshop Spotlight Paper},
+  pdflink = {/papers/han-hri27-public-simulation.pdf},
+  abstract = {Developing public-space robot navigation requires accounting for diverse people and complex social environments. Existing simulators and datasets already seek to capture diverse human behavior in public spaces, yet people are less often engaged in situated evaluation and co-design of robot behavior. We present additions to social-navigation simulation platforms to enable effective co-design of public-space robot behavior with people. Participants experience potentially conflicting encounters with a delivery robot, then demonstrate their preferred navigation strategies by teleoperating the robot, rerunning or branching the scenario, and annotating trajectories. They can also construct sidewalk scenarios they consider important to test. In a study with 15 participants, each experienced four scenarios and contributed preferred behaviors and challenging cases, resulting in 235 navigation trajectories and 51 user-built scenarios. Their interaction traces and in-situ reflections show that the difficulty of sharing a sidewalk with a robot comes not only from its proximity but also from its unexpected behavior, the attention it demands, and its signaling. Our findings provide interactions and scenarios that roboticists developing for navigation in public space should consider.},
   shortvenue = {HRI},
 }
 

@@ -4,6 +4,14 @@ import styles from '../styles/Publications.module.css';
 
 export default function Publications() {
   const [showEarlier, setShowEarlier] = useState(false);
+  const [openAbstracts, setOpenAbstracts] = useState<Set<string>>(new Set());
+  const toggleAbstract = (id: string) =>
+    setOpenAbstracts((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
   const mainPubs = publications.filter((p) => p.section !== 'earlier');
   const earlierPubs = publications.filter((p) => p.section === 'earlier');
 
@@ -51,7 +59,26 @@ export default function Publications() {
                 </a>
               </>
             )}
+            {pub.abstract && (
+              <>
+                {' '}
+                <button
+                  type="button"
+                  className={styles.abstractToggle}
+                  onClick={() => toggleAbstract(pub.id)}
+                  aria-expanded={openAbstracts.has(pub.id)}
+                  aria-controls={`${pub.id}-abstract`}
+                >
+                  [Abstract]
+                </button>
+              </>
+            )}
           </p>
+          {pub.abstract && openAbstracts.has(pub.id) && (
+            <p id={`${pub.id}-abstract`} className={styles.abstract}>
+              {pub.abstract}
+            </p>
+          )}
         </div>
       </div>
     ));

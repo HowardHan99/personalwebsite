@@ -1,7 +1,7 @@
 name: Sync CV from Overleaf
 
 # Pulls the CV project from Overleaf, compiles it, and commits the PDF to
-# public/cv.pdf (served by /api/cv). Only commits when Overleaf actually changed.
+# public/cv.pdf (served by /api/cv). Only compiles/commits when Overleaf actually changed.
 #
 # Setup:
 #   1. Repo Settings → Secrets and variables → Actions → New secret
@@ -10,9 +10,11 @@ name: Sync CV from Overleaf
 #      https://www.overleaf.com/project/<THIS_PART>)
 #   3. Set CV_MAIN_TEX if your main file is not main.tex
 
+# Runs after every push to main (the bot's own CV commits don't re-trigger it),
+# or manually from the Actions tab. Overleaf edits alone don't trigger it.
 on:
-  schedule:
-    - cron: '17 * * * *' # hourly
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

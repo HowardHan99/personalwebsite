@@ -20,6 +20,13 @@ export const community = {
   contactEmail: 'cmupublicrobots@andrew.cmu.edu',
   events: [
     {
+      date: 'Nov 2026',
+      partner: 'CHI 2027, Pittsburgh',
+      title: 'Workshop accepted at CHI 2027',
+      description: 'Our workshop "Human-Centered Public Robotics" was accepted to CHI 2027. In May 2027, we will bring HCI, HRI, and robotics researchers together in Pittsburgh for keynotes, lightning talks, and hands-on sessions with simulated and real robots.',
+      images: [{ src: '/images/socialnav-sim.png', alt: 'A simulated Pittsburgh sidewalk with pedestrians and a delivery robot in our social navigation simulator' }],
+    },
+    {
       date: 'Oct 2026',
       partner: 'BikePGH',
       title: 'BikePGH visits CMU',

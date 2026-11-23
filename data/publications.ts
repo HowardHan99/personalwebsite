@@ -36,6 +36,18 @@ export interface Publication {
  * - award: Award name (e.g., "Best Paper Award") - displays with 🏆 emoji
  */
 const BIBTEX_CONTENT = `
+@inproceedings{han2027publicrobotics,
+  title={Human-Centered Public Robotics: Preparing for a World Where Robots Coexist with People},
+  author={Howard Ziyu Han, Yaxin Hu, Rayna Hata, Michael F. Xu, Daisuke Sato, Sarah E Fox, Aaron Steinfeld, Bilge Mutlu and Nikolas Martelaro},
+  booktitle={Proceedings of the Extended Abstracts of the 2027 CHI Conference on Human Factors in Computing Systems (Workshop)},
+  year={2027},
+  highlight = {Howard Ziyu Han},
+  tags = {Human-Robot Interaction, Public Space Robots, Workshop},
+  image = {/images/public-robots.jpg},
+  abstract = {Robots are increasingly deployed in public settings. Delivery robots navigate sidewalks, cleaning robots operate in airports, and service robots guide museum visitors. Yet public robots are typically evaluated on task performance, while socially appropriate behavior remains hard to define, varying with human activities, implicit norms, and local regulations across places and people. Addressing this requires not only robotics techniques but a deep understanding of the people and social contexts that shape public space. This workshop brings together HCI, HRI, and robotics researchers to ground robot deployment in public space. We ask what a public place and its people demand of a robot, and who gets a say. Through two keynotes, lightning talks, and hands-on sessions with simulated and physical robots, we aim to build a CHI subcommunity on public robotics that shapes which robots enter public space, how they are designed and evaluated, and for whom.},
+  shortvenue = {CHI EA},
+}
+
 @inproceedings{han2027proactive,
   title={Investigating How Designers Perceive the Timing and Content of Proactive AI-generated Feedback},
   author={Howard Ziyu Han, Sirui Tao, Jingwen Pan, Seung Heon Song, Steven P. Dow and Nikolas Martelaro},

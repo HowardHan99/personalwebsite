@@ -36,18 +36,6 @@ export interface Publication {
  * - award: Award name (e.g., "Best Paper Award") - displays with 🏆 emoji
  */
 const BIBTEX_CONTENT = `
-@inproceedings{han2027publicrobotics,
-  title={Human-Centered Public Robotics: Preparing for a World Where Robots Coexist with People},
-  author={Howard Ziyu Han, Yaxin Hu, Rayna Hata, Michael F. Xu, Daisuke Sato, Sarah E Fox, Aaron Steinfeld, Bilge Mutlu and Nikolas Martelaro},
-  booktitle={Proceedings of the Extended Abstracts of the 2027 CHI Conference on Human Factors in Computing Systems (Workshop)},
-  year={2027},
-  highlight = {Howard Ziyu Han},
-  tags = {Human-Robot Interaction, Public Space Robots, Workshop},
-  image = {/images/public-robots.jpg},
-  abstract = {Robots are increasingly deployed in public settings. Delivery robots navigate sidewalks, cleaning robots operate in airports, and service robots guide museum visitors. Yet public robots are typically evaluated on task performance, while socially appropriate behavior remains hard to define, varying with human activities, implicit norms, and local regulations across places and people. Addressing this requires not only robotics techniques but a deep understanding of the people and social contexts that shape public space. This workshop brings together HCI, HRI, and robotics researchers to ground robot deployment in public space. We ask what a public place and its people demand of a robot, and who gets a say. Through two keynotes, lightning talks, and hands-on sessions with simulated and physical robots, we aim to build a CHI subcommunity on public robotics that shapes which robots enter public space, how they are designed and evaluated, and for whom.},
-  shortvenue = {CHI EA},
-}
-
 @inproceedings{han2027proactive,
   title={Investigating How Designers Perceive the Timing and Content of Proactive AI-generated Feedback},
   author={Howard Ziyu Han, Sirui Tao, Jingwen Pan, Seung Heon Song, Steven P. Dow and Nikolas Martelaro},
@@ -103,6 +91,18 @@ const BIBTEX_CONTENT = `
   abstract = {Generative AI agents are increasingly used in interaction design to facilitate ideation and offer critique, often following their own internal reasoning. These interactions tend to add design ideas and expand the design space. Our work explores an antagonistic role for design agents, prompting designers to engage with stakeholder tension. We built an AI agent inspired by adversarial design theory that enacts constructive conflict. We examine the agent's influence in a between-subjects experiment with 45 design students across three conditions: Self Reflection (unsupported review of the design proposal), Stepwise Guidance (written prompts that walk designers through a constructive-conflict framework), and Interactive Engagement (an AI agent that enacts the constructive-conflict framework interactively by synthesizing stakeholder pushback). The latter two conditions share the framework but differ in whether it is self-enacted or agent-enacted. Results show that, compared with Self Reflection, both the Stepwise Guidance and Interactive Engagement groups reported significantly higher self-reconsideration and made more improvements to their design proposals. Compared with Stepwise Guidance, the antagonistic agent introduced more conflictual perspectives, and participants in the Interactive Engagement condition generated and discarded more ideas. These findings suggest that agent-enacted constructive conflict can turn reconsideration into concrete design actions and deepen engagement with divergent stakeholder perspectives.},
 }
 
+@inproceedings{han2027publicrobotics,
+  title={Human-Centered Public Robotics: Preparing for a World Where Robots Coexist with People},
+  author={Howard Ziyu Han, Yaxin Hu, Rayna Hata, Michael F. Xu, Daisuke Sato, Sarah E Fox, Aaron Steinfeld, Bilge Mutlu and Nikolas Martelaro},
+  booktitle={Proceedings of the Extended Abstracts of the 2027 CHI Conference on Human Factors in Computing Systems (Workshop)},
+  year={2027},
+  highlight = {Howard Ziyu Han},
+  tags = {Human-Robot Interaction, Public Space Robots, Workshop},
+  image = {/images/public-robots.jpg},
+  abstract = {Robots are increasingly deployed in public settings. Delivery robots navigate sidewalks, cleaning robots operate in airports, and service robots guide museum visitors. Yet public robots are typically evaluated on task performance, while socially appropriate behavior remains hard to define, varying with human activities, implicit norms, and local regulations across places and people. Addressing this requires not only robotics techniques but a deep understanding of the people and social contexts that shape public space. This workshop brings together HCI, HRI, and robotics researchers to ground robot deployment in public space. We ask what a public place and its people demand of a robot, and who gets a say. Through two keynotes, lightning talks, and hands-on sessions with simulated and physical robots, we aim to build a CHI subcommunity on public robotics that shapes which robots enter public space, how they are designed and evaluated, and for whom.},
+  shortvenue = {CHI EA},
+}
+
 @inproceedings{han2026enhancedsim,
   title={Enhanced Social Navigation Simulation for Community-Driven Participatory Evaluation of Sidewalk Robots},
   author={Howard Ziyu Han, Ying Zhang, Allan Wang and Nikolas Martelaro},
@@ -114,6 +114,20 @@ const BIBTEX_CONTENT = `
   pdflink = {https://doi.org/10.1145/3776734.3794524},
   shortvenue = {HRI},
   abstract = {Using robot simulators in participatory human-robot interaction design can expand the interactions end-users can experience, articulate, and reshape during co-design. In robot social navigation, high-fidelity simulations have largely been developed for benchmarking algorithms and developing robot policy. However, less attention has been given to supporting end-user exploration and articulation of concerns. In this late-break report, we present design considerations and a system implementation that extend an existing social navigation simulator (SEAN 2.0) to support community-driven feedback and evaluation. We add features to the SEAN 2.0 platform to enable richer sidewalk scenario construction, interactive reruns, and robot signaling exploration. Finally, we provide a user scenario and discuss future directions for using participatory simulation to broaden stakeholder involvement and inform socially responsive navigation design.},
+}
+
+@article{deng2025weaudit,
+  title={WeAudit: Scaffolding User Auditors and AI Practitioners in Auditing Generative AI},
+  author={Wesley Deng, Claire Wang, Howard Han, Jason Hong, Kenneth Holstein and Motahhare Eslami},
+  journal={ACM SIGCHI Conference on Computer-Supported Cooperative Work & Social Computing (CSCW)},
+  year={2025},
+  award={CSCW Best Paper Award},
+  image={/images/weaudit.png},
+  pdflink={https://arxiv.org/abs/2501.01397},
+  tags={Generative AI, NLP, Crowdsourcing},
+  highlight={Howard Han},
+  shortvenue = {CSCW},
+  abstract = {There has been growing interest from both practitioners and researchers in engaging end users in AI auditing, to draw upon users' unique knowledge and lived experiences. However, we know little about how to effectively scaffold end users in auditing in ways that can generate actionable insights for AI practitioners. Through formative studies with both users and AI practitioners, we first identified a set of design goals to support user-engaged AI auditing. We then developed WeAudit, a workflow and system that supports end users in auditing AI both individually and collectively. We evaluated WeAudit through a three-week user study with user auditors and interviews with industry Generative AI practitioners. Our findings offer insights into how WeAudit supports users in noticing and reflecting upon potential AI harms and in articulating their findings in ways that industry practitioners can act upon. Based on our observations and feedback from both users and practitioners, we identify several opportunities to better support user engagement in AI auditing processes. We discuss implications for future research to support effective and responsible user engagement in AI auditing and red-teaming.},
 }
 
 @inproceedings{han2024codesign,
@@ -141,20 +155,6 @@ const BIBTEX_CONTENT = `
   highlight = {Howard Han},
   shortvenue = {ASSETS},
   abstract = {Sidewalk robots are becoming increasingly common worldwide, yet their operation on public walkways presents challenges for pedestrians. This is especially true for people with motor disabilities (PWMD) who already manage obstacles such as inadequate ramps and public incivility. The addition of sidewalk robots could further intensify these difficulties, which poses an urgent need to examine how the design of sidewalk robots may influence the daily navigation experiences of PWMD. This poster illustrates findings from semi-structured interviews with ten PWMD, providing insights into their perspectives on the presence of sidewalk robots. The study uncovers potential conflicts in shared sidewalk use and the adaptive actions PWMD described needing to undertake in response. Interviewees raised concerns about whether the robots could accommodate the needs of PWMD, as compared to people walking on foot, and the repercussions of any shortcomings in this regard. Our research also examines tensions stemming from different robotic design choices, indicating the necessity for more accessible public robot designs. We further delve into PWMD’s interaction needs and modalities for routine operation and in the event of robot malfunction. As cities increasingly allow for the deployment of robots in public spaces, this work seeks to inform equitable design and deployment guidelines for sidewalk robots and calls for further research into the implications of the rise of public robots for the diverse populations that make up any given municipality.},
-}
-
-@article{deng2025weaudit,
-  title={WeAudit: Scaffolding User Auditors and AI Practitioners in Auditing Generative AI},
-  author={Wesley Deng, Claire Wang, Howard Han, Jason Hong, Kenneth Holstein and Motahhare Eslami},
-  journal={ACM SIGCHI Conference on Computer-Supported Cooperative Work & Social Computing (CSCW)},
-  year={2025},
-  award={CSCW Best Paper Award},
-  image={/images/weaudit.png},
-  pdflink={https://arxiv.org/abs/2501.01397},
-  tags={Generative AI, NLP, Crowdsourcing},
-  highlight={Howard Han},
-  shortvenue = {CSCW},
-  abstract = {There has been growing interest from both practitioners and researchers in engaging end users in AI auditing, to draw upon users' unique knowledge and lived experiences. However, we know little about how to effectively scaffold end users in auditing in ways that can generate actionable insights for AI practitioners. Through formative studies with both users and AI practitioners, we first identified a set of design goals to support user-engaged AI auditing. We then developed WeAudit, a workflow and system that supports end users in auditing AI both individually and collectively. We evaluated WeAudit through a three-week user study with user auditors and interviews with industry Generative AI practitioners. Our findings offer insights into how WeAudit supports users in noticing and reflecting upon potential AI harms and in articulating their findings in ways that industry practitioners can act upon. Based on our observations and feedback from both users and practitioners, we identify several opportunities to better support user engagement in AI auditing processes. We discuss implications for future research to support effective and responsible user engagement in AI auditing and red-teaming.},
 }
 
 @inproceedings{yi2023catch,
